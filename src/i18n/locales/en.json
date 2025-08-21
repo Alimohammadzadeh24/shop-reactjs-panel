@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "inventory": "Inventory",
+    "returns": "Returns",
+    "users": "Users",
+    "settings": "Settings"
+  },
+  "common": {
+    "search": "Search",
+    "filter": "Filter",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "status": "Status",
+    "actions": "Actions",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "noData": "No data found",
+    "confirm": "Confirm",
+    "price": "Price",
+    "category": "Category",
+    "brand": "Brand",
+    "quantity": "Quantity",
+    "date": "Date",
+    "active": "Active",
+    "inactive": "Inactive",
+    "total": "Total",
+    "revenue": "Revenue",
+    "orders": "Orders",
+    "lowStock": "Low Stock",
+    "pendingReturns": "Pending Returns"
+  },
+  "auth": {
+    "loginTitle": "Admin Panel Login",
+    "loginSubtitle": "Enter your credentials to access the admin panel",
+    "emailPlaceholder": "Enter your email address",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Login",
+    "invalidCredentials": "Invalid credentials"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "overview": "Overview",
+    "salesChart": "Sales Chart",
+    "recentOrders": "Recent Orders",
+    "quickActions": "Quick Actions"
+  },
+  "products": {
+    "title": "Product Management",
+    "addProduct": "Add New Product",
+    "editProduct": "Edit Product",
+    "productName": "Product Name",
+    "description": "Description",
+    "images": "Images",
+    "noProducts": "No products found"
+  },
+  "orders": {
+    "title": "Order Management",
+    "orderNumber": "Order Number",
+    "customer": "Customer",
+    "amount": "Amount",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "inventory": {
+    "title": "Inventory Management",
+    "stockLevel": "Stock Level",
+    "minThreshold": "Min Threshold",
+    "updateStock": "Update Stock",
+    "lowStockAlert": "Low Stock Alert"
+  },
+  "returns": {
+    "title": "Returns Management",
+    "reason": "Return Reason",
+    "refundAmount": "Refund Amount",
+    "requested": "Requested",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "completed": "Completed"
+  },
+  "users": {
+    "title": "User Management",
+    "addUser": "Add New User",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "role": "Role",
+    "admin": "Admin",
+    "primaryInventor": "Primary Inventor",
+    "secondaryInventor": "Secondary Inventor"
+  }
+}

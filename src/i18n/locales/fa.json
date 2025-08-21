@@ -1,0 +1,103 @@
+{
+  "navigation": {
+    "dashboard": "داشبورد",
+    "products": "محصولات",
+    "orders": "سفارشات",
+    "inventory": "انبار",
+    "returns": "مرجوعات",
+    "users": "کاربران",
+    "settings": "تنظیمات"
+  },
+  "common": {
+    "search": "جستجو",
+    "filter": "فیلتر",
+    "create": "ایجاد",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "save": "ذخیره",
+    "cancel": "انصراف",
+    "status": "وضعیت",
+    "actions": "عملیات",
+    "name": "نام",
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "login": "ورود",
+    "logout": "خروج",
+    "loading": "در حال بارگذاری...",
+    "noData": "اطلاعاتی یافت نشد",
+    "confirm": "تایید",
+    "price": "قیمت",
+    "category": "دسته‌بندی",
+    "brand": "برند",
+    "quantity": "تعداد",
+    "date": "تاریخ",
+    "active": "فعال",
+    "inactive": "غیرفعال",
+    "total": "مجموع",
+    "revenue": "درآمد",
+    "orders": "سفارشات",
+    "lowStock": "کمبود موجودی",
+    "pendingReturns": "مرجوعات در انتظار"
+  },
+  "auth": {
+    "loginTitle": "ورود به پنل مدیریت",
+    "loginSubtitle": "برای دسترسی به پنل مدیریت وارد شوید",
+    "emailPlaceholder": "آدرس ایمیل خود را وارد کنید",
+    "passwordPlaceholder": "رمز عبور خود را وارد کنید",
+    "loginButton": "ورود",
+    "invalidCredentials": "اطلاعات وارد شده صحیح نمی‌باشد"
+  },
+  "dashboard": {
+    "welcome": "خوش آمدید",
+    "overview": "نمای کلی",
+    "salesChart": "نمودار فروش",
+    "recentOrders": "آخرین سفارشات",
+    "quickActions": "عملیات سریع"
+  },
+  "products": {
+    "title": "مدیریت محصولات",
+    "addProduct": "افزودن محصول جدید",
+    "editProduct": "ویرایش محصول",
+    "productName": "نام محصول",
+    "description": "توضیحات",
+    "images": "تصاویر",
+    "noProducts": "محصولی یافت نشد"
+  },
+  "orders": {
+    "title": "مدیریت سفارشات",
+    "orderNumber": "شماره سفارش",
+    "customer": "مشتری",
+    "amount": "مبلغ",
+    "pending": "در انتظار",
+    "confirmed": "تایید شده",
+    "shipped": "ارسال شده",
+    "delivered": "تحویل داده شده",
+    "cancelled": "لغو شده"
+  },
+  "inventory": {
+    "title": "مدیریت انبار",
+    "stockLevel": "سطح موجودی",
+    "minThreshold": "حداقل موجودی",
+    "updateStock": "بروزرسانی موجودی",
+    "lowStockAlert": "هشدار کمبود موجودی"
+  },
+  "returns": {
+    "title": "مدیریت مرجوعات",
+    "reason": "دلیل مرجوعی",
+    "refundAmount": "مبلغ بازپرداخت",
+    "requested": "درخواست شده",
+    "approved": "تایید شده",
+    "rejected": "رد شده",
+    "completed": "تکمیل شده"
+  },
+  "users": {
+    "title": "مدیریت کاربران",
+    "addUser": "افزودن کاربر جدید",
+    "firstName": "نام",
+    "lastName": "نام خانوادگی",
+    "role": "نقش",
+    "admin": "مدیر سیستم",
+    "primaryInventor": "مسئول انبار اصلی",
+    "secondaryInventor": "مسئول انبار فرعی"
+  }
+}
