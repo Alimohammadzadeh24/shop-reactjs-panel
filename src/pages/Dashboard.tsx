@@ -78,21 +78,22 @@ const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col space-y-4 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">{t('navigation.dashboard')}</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">{t('navigation.dashboard')}</h1>
           <p className="text-muted-foreground">{t('dashboard.overview')}</p>
         </div>
         <div className="flex gap-2">
-          <Button>
+          <Button className="w-full sm:w-auto">
             <Plus className="h-4 w-4 mr-2" />
-            {t('products.addProduct')}
+            <span className="hidden sm:inline">{t('products.addProduct')}</span>
+            <span className="sm:hidden">افزودن</span>
           </Button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title={t('common.orders')}
           value={dashboardStats?.totalOrders || 156}
@@ -122,7 +123,7 @@ const Dashboard: React.FC = () => {
         />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-3">
         {/* Sales Chart */}
         <Card className="lg:col-span-2">
           <CardHeader>

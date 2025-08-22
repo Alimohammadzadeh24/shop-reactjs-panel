@@ -9,10 +9,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Bell, LogOut, User, Globe } from 'lucide-react';
+import { Bell, LogOut, User, Globe, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onMenuClick?: () => void;
+  isMobile?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ onMenuClick, isMobile = false }) => {
   const { t, i18n } = useTranslation();
   const { user, logout } = useAuthStore();
   const isRTL = i18n.language === 'fa';
@@ -37,28 +42,42 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-card border-b border-border px-6 py-4">
+    <header className="bg-card border-b border-border px-3 md:px-6 py-4">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <h1 className="text-xl font-semibold text-foreground">
-            {t('dashboard.welcome')}, {user?.firstName}
+        <div className="flex items-center space-x-2 md:space-x-4">
+          {/* Mobile menu button */}
+          {isMobile && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onMenuClick}
+              className="md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          )}
+          
+          <h1 className="text-lg md:text-xl font-semibold text-foreground truncate">
+            <span className="hidden sm:inline">{t('dashboard.welcome')}, </span>
+            <span className="sm:hidden">سلام </span>
+            {user?.firstName}
           </h1>
         </div>
 
-        <div className="flex items-center space-x-4">
-          {/* Language Toggle */}
+        <div className="flex items-center space-x-2 md:space-x-4">
+          {/* Language Toggle - Hidden on small screens */}
           <Button
             variant="ghost"
             size="sm"
             onClick={toggleLanguage}
-            className="flex items-center gap-2"
+            className="hidden sm:flex items-center gap-2"
           >
             <Globe className="h-4 w-4" />
             {i18n.language === 'fa' ? 'EN' : 'فا'}
           </Button>
 
-          {/* Notifications */}
-          <Button variant="ghost" size="sm">
+          {/* Notifications - Hidden on small screens */}
+          <Button variant="ghost" size="sm" className="hidden sm:flex">
             <Bell className="h-4 w-4" />
           </Button>
 
@@ -72,7 +91,7 @@ const Header: React.FC = () => {
                   </AvatarFallback>
                 </Avatar>
                 <div className={cn(
-                  "text-left",
+                  "text-left hidden sm:block",
                   isRTL && "text-right"
                 )}>
                   <div className="text-sm font-medium">
@@ -88,6 +107,11 @@ const Header: React.FC = () => {
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
                 <span>پروفایل</span>
+              </DropdownMenuItem>
+              {/* Language option for mobile */}
+              <DropdownMenuItem onClick={toggleLanguage} className="sm:hidden">
+                <Globe className="mr-2 h-4 w-4" />
+                <span>{i18n.language === 'fa' ? 'English' : 'فارسی'}</span>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={logout}>
                 <LogOut className="mr-2 h-4 w-4" />

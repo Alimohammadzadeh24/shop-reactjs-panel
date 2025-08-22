@@ -45,11 +45,11 @@ const Inventory: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">{t('inventory.title')}</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold">{t('inventory.title')}</h1>
       </div>
 
-      <div className="bg-white rounded-lg border p-6">
-        <h2 className="text-xl font-semibold mb-4">{t('inventory.title')}</h2>
+      <div className="bg-white rounded-lg border p-3 sm:p-6">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">{t('inventory.title')}</h2>
         
         {items.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
@@ -65,22 +65,22 @@ const Inventory: React.FC = () => {
           <div className="space-y-4">
             {items.map((item: any, index: number) => (
               <div key={item?.id || index} className="border-b pb-4 last:border-b-0">
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
-                    <strong>{t('products.productName')}:</strong>
-                    <p>{item?.product?.name || item?.productId || 'نامشخص'}</p>
+                    <strong className="text-sm">{t('products.productName')}:</strong>
+                    <p className="text-sm sm:text-base">{item?.product?.name || item?.productId || 'نامشخص'}</p>
                   </div>
                   <div>
-                    <strong>{t('inventory.stockLevel')}:</strong>
-                    <p>{(item?.quantity || 0).toLocaleString('fa-IR')}</p>
+                    <strong className="text-sm">{t('inventory.stockLevel')}:</strong>
+                    <p className="text-sm sm:text-base">{(item?.quantity || 0).toLocaleString('fa-IR')}</p>
                   </div>
                   <div>
-                    <strong>{t('inventory.minThreshold')}:</strong>
-                    <p>{(item?.minThreshold || 0).toLocaleString('fa-IR')}</p>
+                    <strong className="text-sm">{t('inventory.minThreshold')}:</strong>
+                    <p className="text-sm sm:text-base">{(item?.minThreshold || 0).toLocaleString('fa-IR')}</p>
                   </div>
                   <div>
-                    <strong>{t('common.status')}:</strong>
-                    <p className={(item?.quantity || 0) <= (item?.minThreshold || 0) ? 'text-red-600' : 'text-green-600'}>
+                    <strong className="text-sm">{t('common.status')}:</strong>
+                    <p className={`text-sm sm:text-base ${(item?.quantity || 0) <= (item?.minThreshold || 0) ? 'text-red-600' : 'text-green-600'}`}>
                       {(item?.quantity || 0) <= (item?.minThreshold || 0) ? t('inventory.lowStockAlert') : t('common.active')}
                     </p>
                   </div>

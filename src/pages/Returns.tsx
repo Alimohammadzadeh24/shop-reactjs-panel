@@ -45,11 +45,11 @@ const Returns: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">{t('returns.title')}</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold">{t('returns.title')}</h1>
       </div>
 
-      <div className="bg-white rounded-lg border p-6">
-        <h2 className="text-xl font-semibold mb-4">{t('returns.title')}</h2>
+      <div className="bg-white rounded-lg border p-3 sm:p-6">
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">{t('returns.title')}</h2>
         
         {items.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
@@ -65,26 +65,26 @@ const Returns: React.FC = () => {
           <div className="space-y-4">
             {items.map((item: any, index: number) => (
               <div key={item?.id || index} className="border-b pb-4 last:border-b-0">
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                   <div>
-                    <strong>{t('orders.orderNumber')}:</strong>
-                    <p>{item?.orderId || 'نامشخص'}</p>
+                    <strong className="text-sm">{t('orders.orderNumber')}:</strong>
+                    <p className="text-sm sm:text-base">{item?.orderId || 'نامشخص'}</p>
                   </div>
                   <div>
-                    <strong>{t('returns.reason')}:</strong>
-                    <p>{item?.reason || '-'}</p>
+                    <strong className="text-sm">{t('returns.reason')}:</strong>
+                    <p className="text-sm sm:text-base">{item?.reason || '-'}</p>
                   </div>
                   <div>
-                    <strong>{t('returns.refundAmount')}:</strong>
-                    <p>{(item?.refundAmount || 0).toLocaleString('fa-IR')} تومان</p>
+                    <strong className="text-sm">{t('returns.refundAmount')}:</strong>
+                    <p className="text-sm sm:text-base">{(item?.refundAmount || 0).toLocaleString('fa-IR')} تومان</p>
                   </div>
                   <div>
-                    <strong>{t('common.status')}:</strong>
-                    <p>{item?.status || 'نامشخص'}</p>
+                    <strong className="text-sm">{t('common.status')}:</strong>
+                    <p className="text-sm sm:text-base">{item?.status || 'نامشخص'}</p>
                   </div>
                   <div>
-                    <strong>{t('common.date')}:</strong>
-                    <p>{item?.createdAt ? new Date(item.createdAt).toLocaleDateString('fa-IR') : '-'}</p>
+                    <strong className="text-sm">{t('common.date')}:</strong>
+                    <p className="text-sm sm:text-base">{item?.createdAt ? new Date(item.createdAt).toLocaleDateString('fa-IR') : '-'}</p>
                   </div>
                 </div>
               </div>
