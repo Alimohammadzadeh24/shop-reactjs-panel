@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
@@ -12,8 +12,7 @@ import {
   Users,
   Settings,
   ChevronLeft,
-  ChevronRight,
-  Menu
+  ChevronRight
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -72,15 +71,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
     }
   ];
 
-  const filteredItems = navigationItems.filter(item =>
-    item.allowedRoles.includes(user?.role || '')
-  );
+  const role = user?.role || '';
+  const filteredItems = role
+    ? navigationItems.filter((item) => item.allowedRoles.includes(role))
+    : navigationItems;
+  const itemsToShow = filteredItems.length > 0 ? filteredItems : navigationItems;
 
   return (
     <div className={cn(
-      "bg-card border-r border-border transition-all duration-300 flex flex-col",
-      isCollapsed ? "w-16" : "w-64",
-      isRTL ? "border-l border-r-0" : ""
+      "bg-card border-l border-border transition-all duration-300 flex flex-col",
+      isCollapsed ? "w-16" : "w-64"
     )}>
       {/* Header */}
       <div className="p-4 border-b border-border">
@@ -106,7 +106,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
       {/* Navigation */}
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
-          {filteredItems.map((item) => {
+          {itemsToShow.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.href;
 

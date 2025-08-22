@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Bell, LogOut, User, Globe } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();

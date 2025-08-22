@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,12 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import MainLayout from '@/components/Layout/MainLayout';
 import LoginPage from '@/components/Auth/LoginPage';
 import Dashboard from '@/pages/Dashboard';
+import Products from '@/pages/Products';
+import Orders from '@/pages/Orders';
+import Inventory from '@/pages/Inventory';
+import Returns from '@/pages/Returns';
+import Users from '@/pages/Users';
+import Settings from '@/pages/Settings';
 import './i18n';
 
 const queryClient = new QueryClient({
@@ -15,6 +21,12 @@ const queryClient = new QueryClient({
     queries: {
       retry: 1,
       staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+    mutations: {
+      onError: (error: unknown) => {
+        console.error('Mutation error:', error);
+      },
     },
   },
 });
@@ -57,10 +69,7 @@ function App() {
                 path="products" 
                 element={
                   <ProtectedRoute allowedRoles={['ADMIN', 'PRIMARY_INVENTOR']}>
-                    <div className="p-8 text-center">
-                      <h2 className="text-2xl font-bold">صفحه محصولات</h2>
-                      <p className="text-muted-foreground mt-2">این صفحه در حال توسعه می‌باشد</p>
-                    </div>
+                    <Products />
                   </ProtectedRoute>
                 } 
               />
@@ -68,23 +77,13 @@ function App() {
               {/* Orders - All roles with different permissions */}
               <Route 
                 path="orders" 
-                element={
-                  <div className="p-8 text-center">
-                    <h2 className="text-2xl font-bold">صفحه سفارشات</h2>
-                    <p className="text-muted-foreground mt-2">این صفحه در حال توسعه می‌باشد</p>
-                  </div>
-                } 
+                element={<Orders />} 
               />
               
               {/* Inventory - All roles */}
               <Route 
                 path="inventory" 
-                element={
-                  <div className="p-8 text-center">
-                    <h2 className="text-2xl font-bold">صفحه انبار</h2>
-                    <p className="text-muted-foreground mt-2">این صفحه در حال توسعه می‌باشد</p>
-                  </div>
-                } 
+                element={<Inventory />} 
               />
               
               {/* Returns - Admin + Primary Inventor */}
@@ -92,10 +91,7 @@ function App() {
                 path="returns" 
                 element={
                   <ProtectedRoute allowedRoles={['ADMIN', 'PRIMARY_INVENTOR']}>
-                    <div className="p-8 text-center">
-                      <h2 className="text-2xl font-bold">صفحه مرجوعات</h2>
-                      <p className="text-muted-foreground mt-2">این صفحه در حال توسعه می‌باشد</p>
-                    </div>
+                    <Returns />
                   </ProtectedRoute>
                 } 
               />
@@ -105,10 +101,7 @@ function App() {
                 path="users" 
                 element={
                   <ProtectedRoute allowedRoles={['ADMIN']}>
-                    <div className="p-8 text-center">
-                      <h2 className="text-2xl font-bold">صفحه کاربران</h2>
-                      <p className="text-muted-foreground mt-2">این صفحه در حال توسعه می‌باشد</p>
-                    </div>
+                    <Users />
                   </ProtectedRoute>
                 } 
               />
@@ -116,12 +109,7 @@ function App() {
               {/* Settings - All roles */}
               <Route 
                 path="settings" 
-                element={
-                  <div className="p-8 text-center">
-                    <h2 className="text-2xl font-bold">صفحه تنظیمات</h2>
-                    <p className="text-muted-foreground mt-2">این صفحه در حال توسعه می‌باشد</p>
-                  </div>
-                } 
+                element={<Settings />} 
               />
             </Route>
           </Routes>
