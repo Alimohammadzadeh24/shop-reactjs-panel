@@ -37,7 +37,8 @@
     "revenue": "Revenue",
     "orders": "Orders",
     "lowStock": "Low Stock",
-    "pendingReturns": "Pending Returns"
+    "pendingReturns": "Pending Returns",
+    "close": "Close"
   },
   "auth": {
     "loginTitle": "Admin Panel Login",
@@ -72,7 +73,15 @@
     "confirmed": "Confirmed",
     "shipped": "Shipped",
     "delivered": "Delivered",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "orderDetails": "Order Details",
+    "editStatus": "Edit Status",
+    "currentStatus": "Current Status",
+    "newStatus": "New Status",
+    "selectStatus": "Select Status",
+    "statusUpdated": "Status updated successfully",
+    "shippingAddress": "Shipping Address",
+    "items": "Order Items"
   },
   "inventory": {
     "title": "Inventory Management",

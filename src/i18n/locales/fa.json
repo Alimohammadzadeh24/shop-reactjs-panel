@@ -72,7 +72,15 @@
     "confirmed": "تایید شده",
     "shipped": "ارسال شده",
     "delivered": "تحویل داده شده",
-    "cancelled": "لغو شده"
+    "cancelled": "لغو شده",
+    "orderDetails": "جزئیات سفارش",
+    "editStatus": "ویرایش وضعیت",
+    "currentStatus": "وضعیت فعلی",
+    "newStatus": "وضعیت جدید",
+    "selectStatus": "انتخاب وضعیت",
+    "statusUpdated": "وضعیت با موفقیت بروزرسانی شد",
+    "shippingAddress": "آدرس ارسال",
+    "items": "آیتم‌های سفارش"
   },
   "inventory": {
     "title": "مدیریت انبار",

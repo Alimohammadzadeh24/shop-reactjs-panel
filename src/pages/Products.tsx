@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { Plus } from 'lucide-react';
+import { Plus, Edit } from 'lucide-react';
 import { apiService } from '@/services/api';
 import { Product } from '@/types';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -30,7 +30,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-type CreateProductForm = {
+type ProductForm = {
   name: string;
   description: string;
   price: string;
@@ -44,13 +44,14 @@ const Products: React.FC = () => {
   const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [search, setSearch] = useState('');
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
   const { data } = useQuery<{ data: Product[]; total: number }>({
     queryKey: ['products', { search }],
     queryFn: () => apiService.getProducts(search ? { search } : undefined),
   });
 
-  const form = useForm<CreateProductForm>({
+  const form = useForm<ProductForm>({
     defaultValues: {
       name: '',
       description: '',
@@ -63,7 +64,7 @@ const Products: React.FC = () => {
   });
 
   const { mutateAsync: createProduct, isPending: isSaving } = useMutation({
-    mutationFn: async (values: CreateProductForm) => {
+    mutationFn: async (values: ProductForm) => {
       const payload = {
         name: values.name,
         description: values.description,
@@ -86,6 +87,64 @@ const Products: React.FC = () => {
       toast.error('خطا در ذخیره محصول');
     },
   });
+
+  const { mutateAsync: updateProduct, isPending: isUpdating } = useMutation({
+    mutationFn: async (values: ProductForm) => {
+      if (!editingProduct) throw new Error('No product selected for editing');
+      const payload = {
+        name: values.name,
+        description: values.description,
+        price: Number(values.price || 0),
+        category: values.category,
+        brand: values.brand,
+        isActive: values.isActive,
+      } as Partial<Product>;
+      return apiService.updateProduct(editingProduct.id, payload);
+    },
+    onSuccess: () => {
+      toast.success(t('common.save'));
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['products', { search }] });
+      setIsDialogOpen(false);
+      setEditingProduct(null);
+      form.reset();
+    },
+    onError: () => {
+      toast.error('خطا در بروزرسانی محصول');
+    },
+  });
+
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product);
+    form.reset({
+      name: product.name,
+      description: product.description,
+      price: product.price.toString(),
+      category: product.category,
+      brand: product.brand,
+      isActive: product.isActive,
+    });
+    setIsDialogOpen(true);
+  };
+
+  const handleSubmit = async (values: ProductForm) => {
+    if (!values.name) {
+      form.setError('name', { message: t('products.productName') as string });
+      return;
+    }
+    
+    if (editingProduct) {
+      await updateProduct(values);
+    } else {
+      await createProduct(values);
+    }
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    setEditingProduct(null);
+    form.reset();
+  };
 
   // Do not block on loading/error; show empty state or partial UI instead
 
@@ -114,18 +173,14 @@ const Products: React.FC = () => {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>{t('products.addProduct')}</DialogTitle>
+                <DialogTitle>
+                  {editingProduct ? t('products.editProduct') : t('products.addProduct')}
+                </DialogTitle>
               </DialogHeader>
               <Form {...form}>
                 <form
                   className="space-y-4"
-                  onSubmit={form.handleSubmit(async (values) => {
-                    if (!values.name) {
-                      form.setError('name', { message: t('products.productName') as string });
-                      return;
-                    }
-                    await createProduct(values);
-                  })}
+                  onSubmit={form.handleSubmit(handleSubmit)}
                 >
                   <FormField
                     control={form.control}
@@ -216,11 +271,11 @@ const Products: React.FC = () => {
                     />
                   </div>
                   <DialogFooter>
-                    <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                    <Button type="button" variant="outline" onClick={handleCloseDialog}>
                       {t('common.cancel')}
                     </Button>
-                    <Button type="submit" disabled={isSaving}>
-                      {isSaving ? t('common.loading') : t('common.save')}
+                    <Button type="submit" disabled={isSaving || isUpdating}>
+                      {(isSaving || isUpdating) ? t('common.loading') : t('common.save')}
                     </Button>
                   </DialogFooter>
                 </form>
@@ -247,6 +302,7 @@ const Products: React.FC = () => {
                     <TableHead className="whitespace-nowrap">{t('common.brand')}</TableHead>
                     <TableHead className="whitespace-nowrap">{t('common.price')}</TableHead>
                     <TableHead className="whitespace-nowrap">{t('common.status')}</TableHead>
+                    <TableHead className="whitespace-nowrap">{t('common.actions')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -260,6 +316,11 @@ const Products: React.FC = () => {
                         <Badge variant={p.isActive ? 'default' : 'secondary'}>
                           {p.isActive ? t('common.active') : t('common.inactive')}
                         </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Button variant="outline" size="sm" onClick={() => handleEditProduct(p)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
